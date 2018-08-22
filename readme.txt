@@ -85,7 +85,6 @@ WP Discord Post comes with some hooks that you can use to customize how the plug
 * Discord notification when updating WooCommerce products (stock and sales updates)
 * Sales reports for WooCommerce in Discord
 * Discord notification on newsletter signup for MailChimp (TBC)
-* Compatibility with Yoast SEO and OpenGraph
 * Compatibility with WooCommerce Subscriptions
 * Compatibility with WooCommerce Memberships
 * More ideas? Tell me in the [support forum](https://wordpress.org/support/plugin/wp-discord-post/)
