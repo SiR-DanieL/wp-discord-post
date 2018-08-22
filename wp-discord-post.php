@@ -4,6 +4,7 @@
  *
  * @author      Nicola Mustone
  * @license     GPL-2.0+
+ * @package     WP Discord Post
  *
  * Plugin Name: WP Discord Post
  * Plugin URI:  https://wordpress.org/plugins/wp-discord-post/
