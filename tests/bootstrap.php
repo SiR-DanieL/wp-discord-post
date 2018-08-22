@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file
  *
- * @package Wp_Discord_Post
+ * @package     WP Discord Post/Tests
  */
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
