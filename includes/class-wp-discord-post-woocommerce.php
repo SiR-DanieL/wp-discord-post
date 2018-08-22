@@ -41,7 +41,11 @@ class WP_Discord_Post_WooCommerce {
 
 		$product = wc_get_product( $id );
 		$content = $this->_prepare_product_content( $product );
-		$embed   = $this->_prepare_product_embed( $id, $product );
+		$embed   = array();
+
+		if ( ! wp_discord_post_is_embed_enabled() ) {
+			$embed   = $this->_prepare_product_embed( $id, $product );
+		}
 
 		$http = new WP_Discord_Post_HTTP( 'product' );
 		return $http->process( $content, $embed, $id );
@@ -55,7 +59,11 @@ class WP_Discord_Post_WooCommerce {
 	public function send_order( $order_id ) {
 		$order   = wc_get_order( $order_id );
 		$content = $this->_prepare_order_content( $order );
-		$embed   = $this->_prepare_order_embed( $order_id, $order );
+		$embed   = array();
+
+		if ( ! wp_discord_post_is_embed_enabled() ) {
+			$embed   = $this->_prepare_order_embed( $order_id, $order );
+		}
 
 		$http = new WP_Discord_Post_HTTP( 'post' );
 		return $http->process( $content, $embed );

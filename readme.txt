@@ -111,16 +111,16 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 == Changelog ==
 
 = 2.1.0 =
-
+* New: added option to disable the embed content added by the plugin and use the default one by Discord.
+* Fix: encoded HTML entities in Discord message, post title, and content.
 * Dev: added parameter `$post` to the filter `wp_discord_post_is_new_post`.
+* Dev: started writing PHP Unit tests.
 
 = 2.0.2 =
-
 * Fix: content for posts was not being sent to Discord.
 * Dev: added filters `wp_discord_post_{context}_webhook_url` and `wp_discord_post_webhook_url`.
 
 = 2.0.1 =
-
 * Fix: _wp_discord_post_published was not set when processing posts and products.
 
 = 2.0.0 =

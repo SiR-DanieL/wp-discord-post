@@ -212,7 +212,7 @@ class WP_Discord_Post_HTTP {
 	 */
 	private function _send_request( $content, $embed ) {
 		$args = array(
-			'content'    => esc_html( $content ),
+			'content'    => html_entity_decode( esc_html( $content ) ),
 			'username'   => esc_html( $this->get_username() ),
 			'avatar_url' => esc_url( $this->get_avatar() ),
 		);

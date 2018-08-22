@@ -34,7 +34,11 @@ class WP_Discord_Post_Post {
 		}
 
 		$content = $this->_prepare_content( $id, $post );
-		$embed   = $this->_prepare_embed( $id, $post );
+		$embed   = array();
+
+		if ( ! wp_discord_post_is_embed_enabled() ) {
+			$embed   = $this->_prepare_embed( $id, $post );
+		}
 
 		$http = new WP_Discord_Post_HTTP( 'post' );
 		return $http->process( $content, $embed, $id );
@@ -124,7 +128,7 @@ class WP_Discord_Post_Post {
 		$text      = WP_Discord_Post_Formatting::get_description( $post );
 
 		$embed = array(
-			'title'       => $post->post_title,
+			'title'       => html_entity_decode( get_the_title( $id ) ),
 			'description' => $text,
 			'url'         => get_permalink( $id ),
 			'timestamp'   => get_the_date( 'c', $id ),

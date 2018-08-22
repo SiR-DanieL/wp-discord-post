@@ -48,6 +48,7 @@ class WP_Discord_Post_Formatting {
 		$text           = strip_shortcodes( $post->post_content );
 		$text           = apply_filters( 'the_content', $text );
 		$text           = str_replace(']]>', ']]&gt;', $text);
+		$text           = html_entity_decode( $text );
 		$excerpt_length = apply_filters( 'excerpt_length', 55 );
 		$excerpt_more   = apply_filters( 'excerpt_more', ' ' . '...' );
 		$text           = wp_trim_words( $text, $excerpt_length, $excerpt_more );

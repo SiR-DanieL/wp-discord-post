@@ -10,7 +10,6 @@
  * Tests the functions in functions-general.php
  */
 class Test_Functions_General extends WP_UnitTestCase {
-
 	/**
 	 * @covers wp_discord_post_is_logging_enabled
 	 */
