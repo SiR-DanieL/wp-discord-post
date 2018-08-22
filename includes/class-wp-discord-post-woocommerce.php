@@ -57,9 +57,15 @@ class WP_Discord_Post_WooCommerce {
 	 * @param int $order_id The order ID.
 	 */
 	public function send_order( $order_id ) {
-		$order   = wc_get_order( $order_id );
-		$content = $this->_prepare_order_content( $order );
-		$embed   = array();
+		$order            = wc_get_order( $order_id );
+		$allowed_statuses = apply_filters( 'wp_discord_post_allowed_order_statuses', array( 'on-hold', 'processing', 'completed' ) );
+
+		if ( ! in_array( $order->get_status(), $allowed_statuses ) ) {
+			return false;
+		}
+
+		$content          = $this->_prepare_order_content( $order );
+		$embed            = array();
 
 		if ( ! wp_discord_post_is_embed_enabled() ) {
 			$embed   = $this->_prepare_order_embed( $order_id, $order );
