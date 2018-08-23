@@ -83,7 +83,7 @@ class WP_Discord_Post_Post {
 	/**
 	 * Prepares the request content for posts.
 	 *
-	 * @param  object  $id   The post ID.
+	 * @param  int     $id   The post ID.
 	 * @param  WP_Post $post The post object.
 	 * @return string
 	 * @access private
