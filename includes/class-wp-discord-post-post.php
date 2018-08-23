@@ -118,7 +118,7 @@ class WP_Discord_Post_Post {
 	/**
 	 * Prepares the embed for the GF form.
 	 *
-	 * @param  array   $id   The post ID.
+	 * @param  int     $id   The post ID.
 	 * @param  WP_Post $post The post object.
 	 * @return array
 	 * @access private
