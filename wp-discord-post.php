@@ -114,15 +114,15 @@ class WP_Discord_Post {
 		$this->post = require_once( 'includes/class-wp-discord-post-post.php' );
 
 		if ( 'yes' === get_option( 'wp_discord_enabled_for_cf7' ) && class_exists( 'WPCF7' ) ) {
-			$this->cf7 = include_once( 'includes/class-wp-discord-post-contact-form-7.php' );
+			$this->cf7 = include_once( 'includes/class-wp-discord-post-cf7.php' );
 		}
 
 		if ( 'yes' === get_option( 'wp_discord_enabled_for_jetpack_cf' ) && class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'contact-form' ) ) {
-			$this->jetpack_cf = include_once( 'includes/class-wp-discord-post-jetpack-contact-form.php' );
+			$this->jetpack_cf = include_once( 'includes/class-wp-discord-post-jetpack-cf.php' );
 		}
 
 		if ( 'yes' === get_option( 'wp_discord_enabled_for_gf' ) && class_exists( 'GFForms' ) ) {
-			$this->gf = include_once( 'includes/class-wp-discord-post-gravityforms.php' );
+			$this->gf = include_once( 'includes/class-wp-discord-post-gf.php' );
 		}
 
 		if ( class_exists( 'WooCommerce' ) ) {
