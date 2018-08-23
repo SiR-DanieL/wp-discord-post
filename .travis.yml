@@ -2,36 +2,19 @@ sudo: false
 
 language: php
 
-notifications:
-  email:
-    on_success: never
-    on_failure: change
+env:
+  - WP_VERSION=latest WP_MULTISITE=0
 
-branches:
-  only:
-    - master
-
-cache:
-  directories:
-    - vendor
-    - $HOME/.composer/cache
-
+# Additional tests against stable PHP (min recommended version is 5.6) and past supported versions of WP
+# and code coverage report.
 matrix:
+  fast_finish: true
   include:
     - php: 7.1
-      env: WP_VERSION=latest
     - php: 7.0
-      env: WP_VERSION=latest
     - php: 5.6
-      env: WP_VERSION=4.4
+      env: WP_VERSION=4.4 WP_MULTISITE=0
     - php: 5.6
-      env: WP_VERSION=latest
-    - php: 5.6
-      env: WP_VERSION=trunk
-    - php: 5.6
-      env: WP_TRAVISCI=phpcs
-    - php: 5.3
-      env: WP_VERSION=latest
 
 before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -60,9 +43,15 @@ script:
   - |
     if [[ ! -z "$WP_VERSION" ]] ; then
       phpunit
-      WP_MULTISITE=1 phpunit
     fi
   - |
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
       phpcs
     fi
+
+# Specifies that Travis should create builds for master and release branches and also tags.
+branches:
+  only:
+    - master
+    - /^\d+\.\d+(\.\d+)?(-\S*)?$/
+    - /^release\//
