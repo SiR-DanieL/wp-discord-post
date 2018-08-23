@@ -103,7 +103,7 @@ class WP_Discord_Post_Post {
 		);
 
 		if ( empty( $content ) ) {
-			$content = sprintf( esc_html__( '%1$s just published the %2$s %3$s on their blog: %4$s', 'wp-discord-post' ), $author, get_post_type( $id ), esc_html( $post->post_title ), get_permalink( $id ) );
+			$content = sprintf( esc_html__( '%1$s just published the %2$s %3$s on their blog: %4$s', 'wp-discord-post' ), $author, (string) get_post_type( $id ), esc_html( $post->post_title ), get_permalink( $id ) );
 		}
 
 		if ( 'yes' === $mention_everyone && false === strpos( $content, '@everyone' ) ) {
@@ -133,7 +133,7 @@ class WP_Discord_Post_Post {
 			'url'         => get_permalink( $id ),
 			'timestamp'   => get_the_date( 'c', $id ),
 			'image'       => $thumbnail,
-			'author'      => get_the_author_meta( 'display_name', $post->post_author ),
+			'author'      => get_the_author_meta( 'display_name', (int) $post->post_author ),
 			'fields'      => array(),
 		);
 
