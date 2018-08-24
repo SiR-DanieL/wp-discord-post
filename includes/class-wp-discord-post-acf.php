@@ -33,14 +33,14 @@ class WP_Discord_Post_ACF {
 			<td>
 				<?php
 				do_action( 'acf/create_field', array(
-					'type'	=>	'radio',
-					'name'	=>	'fields[' .$fake_name . '][wp_discord_post]',
-					'value'	=>	$field['wp_discord_post'],
-					'choices'	=>	array(
-						1	=>	esc_html__( 'Yes', 'acf' ),
-						0	=>	esc_html__( 'No', 'acf' ),
+					'type'	        =>	'checkbox',
+					'name'	        =>	'fields[' .$fake_name . '][wp_discord_post]',
+					'value'	        =>	$field['wp_discord_post'],
+					'choices'	    =>	array(
+						'yes' => esc_html__( 'Yes', 'acf' ),
 					),
-					'layout'	=>	'horizontal',
+					'layout'	    =>	'horizontal',
+					'default_value' => 0,
 				) );
 				?>
 			</td>
