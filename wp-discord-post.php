@@ -70,6 +70,13 @@ class WP_Discord_Post {
 	public $woocommerce = null;
 
 	/**
+	 * The instance of WP_Discord_Post_ACF.
+	 *
+	 * @var WP_Discord_Post_ACF
+	 */
+	public $acf = null;
+
+	/**
 	 * Main WP_Discord_Post Instance.
 	 *
 	 * Ensures only one instance of WP_Discord_Post is loaded or can be loaded.
@@ -127,6 +134,10 @@ class WP_Discord_Post {
 
 		if ( class_exists( 'WooCommerce' ) ) {
 			$this->woocommerce = include_once( 'includes/class-wp-discord-post-woocommerce.php' );
+		}
+
+		if ( class_exists( 'acf' ) ) {
+			$this->acf = include_once( 'includes/class-wp-discord-post-acf.php' );
 		}
 
 		$this->load_textdomain();
