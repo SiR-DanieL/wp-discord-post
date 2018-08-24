@@ -111,6 +111,10 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 == Changelog ==
 
+= 2.1.1 =
+
+* Fix: the filter `wp_discord_post_order_embed` was getting the wrong arguments, now it gets the order object.
+
 = 2.1.0 =
 * New: added option to disable the embed content added by the plugin and use the default one by Discord.
 * Fix: only post orders with status On Hold, Processing, or Completed.

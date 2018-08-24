@@ -357,7 +357,7 @@ class WP_Discord_Post_WooCommerce {
 			);
 		}
 
-		$embed = apply_filters( 'wp_discord_post_order_embed', $embed, $product );
+		$embed = apply_filters( 'wp_discord_post_order_embed', $embed, $order );
 
 		return $embed;
 	}
