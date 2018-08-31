@@ -18,7 +18,11 @@ class WP_Discord_Post_Post {
 	 * Adds the hook to handle posts.
 	 */
 	public function __construct() {
-		add_action( 'publish_post', array( $this, 'send' ), 10, 2 );
+		if ( ! class_exists( 'acf' ) ) {
+			add_action( 'save_post_post', array( $this, 'send' ) );
+		} else {
+			add_action( 'acf/save_post', array( $this, 'send' ) );
+		}
 	}
 
 	/**
@@ -27,7 +31,13 @@ class WP_Discord_Post_Post {
 	 * @param  int     $id   The post ID.
 	 * @param  WP_Post $post The post object.
 	 */
-	public function send( $id, $post ) {
+	public function send( $id ) {
+		if ( get_post_status( $id ) !== 'publish' && 'post' !== get_post_type( $id ) ) {
+			return;
+		}
+
+		$post = get_post( $id );
+
 		// Check if the post has been already published and if it should be processed.
 		if ( ! apply_filters( 'wp_discord_post_is_new_post', $this->is_new_post( $post ), $post ) ) {
 			return;

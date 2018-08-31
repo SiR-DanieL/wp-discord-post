@@ -19,7 +19,7 @@ class WP_Discord_Post_WooCommerce {
 	 */
 	public function __construct() {
 		if ( 'yes' === get_option( 'wp_discord_enabled_for_woocommerce_products' ) ) {
-			add_action( 'woocommerce_process_product_meta', array( $this, 'send_product' ), 20, 2 );
+			add_action( 'save_post', array( $this, 'send_product' ), 20 );
 		}
 
 		if ( 'yes' === get_option( 'wp_discord_enabled_for_woocommerce' ) ) {
@@ -33,13 +33,18 @@ class WP_Discord_Post_WooCommerce {
 	 * @param int $id The product ID.
 	 * @param WC_Product $product The product object.
 	 */
-	public function send_product( $id, $product ) {
+	public function send_product( $id ) {
+		if ( get_post_status( $id ) !== 'publish' && 'product' !== get_post_type( $id ) ) {
+			return;
+		}
+
+		$product = wc_get_product( $id );
+
 		// Check if the product has been already published and if it should be processed.
 		if ( ! apply_filters( 'wp_discord_post_is_new_product', $this->is_new_product( $product ) ) ) {
 			return;
 		}
 
-		$product = wc_get_product( $id );
 		$content = $this->_prepare_product_content( $product );
 		$embed   = array();
 
@@ -58,7 +63,7 @@ class WP_Discord_Post_WooCommerce {
 	 */
 	public function send_order( $order_id ) {
 		$order            = wc_get_order( $order_id );
-		$allowed_statuses = apply_filters( 'wp_discord_post_allowed_order_statuses', array( 'on-hold', 'processing', 'completed' ) );
+		$allowed_statuses = apply_filters( 'wp_discord_post_allowed_order_statuses', array( 'on-hold', 'pending', 'processing', 'completed' ) );
 
 		if ( ! in_array( $order->get_status(), $allowed_statuses ) ) {
 			return false;
